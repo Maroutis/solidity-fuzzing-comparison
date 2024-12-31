@@ -8,10 +8,10 @@
 		"shrinkLimit": 500,
 		"callSequenceLength": 100,
 		"_COMMENT_TESTING_8": "added directory to store coverage data",
-		"corpusDirectory": "coverage-medusa-basic",
+		"corpusDirectory": "coverage-medusa",
 		"coverageEnabled": true,
 		"_COMMENT_TESTING_2": "added test contract to deploymentOrder",
-		"targetContracts": ["NaiveReceiverAdvancedEchidna"],
+		"targetContracts": ["NaiveReceiverEchidnaMedusa"],
 		"targetContractsBalances": ["0x36c090d0ca68880000"],
 		"constructorArgs": {},
 		"deployerAddress": "0x30000",
@@ -49,7 +49,7 @@
 				"enabled": true,
 				"_COMMENT_TESTING_6": "changed prefix to use existing Echidna test files",
 				"testPrefixes": [
-					"invariant_"
+					"property_"
 				]
 			},
 			"optimizationTesting": {

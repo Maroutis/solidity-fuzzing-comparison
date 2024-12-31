@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.23;
 
-import { Vesting } from "../../src/09-vesting/Vesting.sol";
-import { BaseSetup } from "@chimera/BaseSetup.sol";
+import {Vesting} from "../../src/09-vesting/Vesting.sol";
+import {BaseSetup} from "@chimera/BaseSetup.sol";
 
 abstract contract Setup is BaseSetup {
     // contract being tested
@@ -18,8 +18,7 @@ abstract contract Setup is BaseSetup {
         recipients.push(address(0x2222));
 
         // prepare allocation array
-        Vesting.AllocationInput[] memory inputs
-            = new Vesting.AllocationInput[](2);
+        Vesting.AllocationInput[] memory inputs = new Vesting.AllocationInput[](2);
         inputs[0].recipient = recipients[0];
         inputs[0].points = TOTAL_POINTS / 2;
         inputs[0].vestingWeeks = 10;

@@ -41,6 +41,7 @@ contract Vesting {
     // another address if they haven't claimed
     function transferPoints(address to, uint24 points) external {
         require(points != 0, "Zero points invalid");
+        require(msg.sender != to, "Self transfer invalid"); // Fix
 
         AllocationData memory fromAllocation = allocations[msg.sender];
         require(fromAllocation.points >= points, "Insufficient points");
