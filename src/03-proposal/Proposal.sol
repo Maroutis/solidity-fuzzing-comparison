@@ -130,7 +130,7 @@ contract Proposal {
 
         // update storage to increment total current votes
         // and store new value on the stack
-        uint256 totalCurrentVotes = ++s_totalCurrentVotes;
+        uint256 totalCurrentVotes = ++s_totalCurrentVotes;//@note always equal to 1
 
         // add user to either the `for` or `against` list
         if(voteInput) s_votersFor.push(voter);

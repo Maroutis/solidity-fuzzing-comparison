@@ -1,30 +1,24 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.23;
 
-import {Asserts} from "@chimera/Asserts.sol";
 import {Setup} from "./Setup.sol";
+import {Asserts} from "@chimera/Asserts.sol";
 
 abstract contract Properties is Setup, Asserts {
+    // The pool balance cannot be decreased, else it is a big vulnerability
+    function invariant_funds_sent_when_proposal_surpasses_quorum() public view returns (bool result) {
+        return (
+            ((numberOfVotes * 100 / 5) > 51 && address(proposal).balance == 0)
+                || ((numberOfVotes * 100 / 5) <= 51 && address(proposal).balance > 0)
+        );
+    }
 
-    // event to raise if invariant broken to see interesting state
-    event ProposalBalance(uint256 balance);
-
-    // once the proposal has completed, all the eth should be distributed
-    // either to the owner if the proposal failed or to the winners if
-    // the proposal succeeded. no eth should remain forever stuck in the
-    // contract
-    function property_proposal_complete_all_rewards_distributed() public returns(bool) {
-        uint256 proposalBalance = address(prop).balance;
-
-        // only visible when invariant fails
-        emit ProposalBalance(proposalBalance);
-
-        return(
-            // either proposal is active and contract balance > 0 
-            (prop.isActive() && proposalBalance > 0) ||
-
-            // or proposal is not active and contract balance == 0
-            (!prop.isActive() && proposalBalance == 0)
+    function invariant_funds_are_sent_when_proposal_is_inactive() public view returns (bool result) {
+        return (
+            (
+                proposal.isActive() && address(proposal).balance > 0
+                    || !proposal.isActive() && address(proposal).balance == 0
+            )
         );
     }
 }
